@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultimate Bestie Fun</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(to right, #8e44ad, #3498db);
+      font-family: 'Comic Sans MS', cursive;
+      overflow: hidden;
+      color: white;
+    }
+    h1 {
+      font-size: 3em;
+      animation: glow 2s infinite alternate ease-in-out;
+      text-align: center;
+    }
+    .game-section, .joke-section {
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+    }
+    .game-section {
+      animation-delay: 2s;
+    }
+    .joke-section {
+      animation-delay: 5s;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      color: white;
+      background: #e74c3c;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      animation: bounce 2s infinite alternate ease-in-out;
+    }
+    button:hover {
+      background: #c0392b;
+    }
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px #ffffff, 0 0 20px #f39c12, 0 0 30px #e67e22; }
+      100% { text-shadow: 0 0 20px #ffffff, 0 0 30px #f39c12, 0 0 40px #e67e22; }
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Ultimate Bestie Fun Zone! 🎉</h1>
+  
+  <div class="game-section">
+    <h2>🌟 Mini Game: Guess the Number 🌟</h2>
+    <p>I’m thinking of a number between 1 and 10. Can you guess it?</p>
+    <input type="number" id="guess-input" min="1" max="10" placeholder="Your guess">
+    <button onclick="guessNumber()">Submit</button>
+    <p id="guess-result"></p>
+  </div>
+  
+  <div class="joke-section">
+    <h2>😂 Random Jokes Time! 😂</h2>
+    <p id="joke-text">Click the button for a joke!</p>
+    <button onclick="showJoke()">Tell me a joke</button>
+  </div>
+  
+  <script>
+    // Mini Game Logic
+    const randomNumber = Math.floor(Math.random() * 10) + 1;
+    let attempts = 0;
+
+    function guessNumber() {
+      const userGuess = parseInt(document.getElementById("guess-input").value);
+      const resultElement = document.getElementById("guess-result");
+      attempts++;
+
+      if (userGuess === randomNumber) {
+        resultElement.textContent = `🎉 You guessed it right in ${attempts} attempts! The number was ${randomNumber}.`;
+        resultElement.style.color = "#2ecc71";
+      } else if (userGuess > randomNumber) {
+        resultElement.textContent = "❌ Too high! Try again.";
+        resultElement.style.color = "#e74c3c";
+      } else if (userGuess < randomNumber) {
+        resultElement.textContent = "❌ Too low! Try again.";
+        resultElement.style.color = "#e74c3c";
+      } else {
+        resultElement.textContent = "😕 Please enter a valid number.";
+        resultElement.style.color = "#e67e22";
+      }
+    }
+
+    // Random Jokes Logic
+    const jokes = [
+      "Why don’t skeletons fight each other? They don’t have the guts! 😂",
+      "What do you call fake spaghetti? An impasta! 🍝",
+      "Why don’t eggs tell jokes? They’d crack each other up! 🥚",
+      "I’m reading a book on anti-gravity. It’s impossible to put down! 📖",
+      "Why did the scarecrow win an award? He was outstanding in his field! 🌾"
+    ];
+
+    function showJoke() {
+      const jokeElement = document.getElementById("joke-text");
+      const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+      jokeElement.textContent = randomJoke;
+    }
+  </script>
+</body>
+</html>
